@@ -1,0 +1,19 @@
+---
+description: Authoring standards for Agent Skills (SKILL.md) so they score well in Skill Health Lens
+alwaysApply: false
+globs:
+  - "**/SKILL.md"
+  - ".cursor/skills/**/*.md"
+  - ".claude/skills/**/*.md"
+---
+
+skill-authoring:
+
+- Frontmatter MUST include `name` (kebab-case) and `description` (30–400 chars naming concrete triggers).
+- Include `allowed_tools` when the skill performs file edits, shell execution, or network calls. Prefer the smallest set.
+- Lead with a `## When to use` section listing concrete situations, not abstract themes.
+- Use numbered steps for procedures; avoid prose paragraphs longer than 3 sentences.
+- Keep the body under ~2,000 tokens. If it grows past 5,000, split into sub-skills.
+- Avoid vague verbs ("consider", "maybe", "could"); prefer imperatives ("run", "check", "report").
+- Cite source docs for any factual or policy claim.
+- Do not duplicate content that already lives in a Project Rule — link to the rule instead.

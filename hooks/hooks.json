@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "afterFileEdit": [
+      {
+        "command": "./scripts/touch-skill.sh",
+        "matcher": "SKILL\\.md$"
+      }
+    ]
+  }
+}

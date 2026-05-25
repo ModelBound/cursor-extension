@@ -1,33 +1,51 @@
-# ModelBound for Cursor & VS Code
+# ModelBound Skill Health Lens — Cursor Plugin
 
-The fastest way to ship safe, well-scoped, well-sized **Agent Skills** — right inside your editor.
+Audit Agent Skills (`SKILL.md` files) for trust, token budget, duplicates, and tool-surface risk — without leaving Cursor.
 
-ModelBound runs **local checks** on every `SKILL.md` in your workspace and shows you:
+Built and maintained by [ModelBound](https://modelbound.co), the unified knowledge index and MCP tool proxy for AI agents.
 
-- **Trust score (0–100)** — clarity, safety, fit. Powered by the same scanner that runs on modelbound.co.
-- **Token budget per skill** — green / amber / red against published per-category budgets.
-- **Sync status** — if your repo is connected to ModelBound, see at a glance whether your local edits are in sync with the cloud.
-- **Duplicate detection** — flags skills with high name/description overlap so they don't collide at runtime.
-- **Tool surface audit** — warns on dangerous `allowed_tools` combinations (Bash + Network, Write to sensitive paths).
+## What's in the box
 
-**Free forever** for local checks. Sign in to unlock AI Review, the Skill Marketplace and team rule libraries.
+| Component | Purpose |
+| --- | --- |
+| **Skill** · `skill-health-lens` | Invoke with `/skill-health-lens` to run the four core checks |
+| **Rule** · `skill-authoring` | Inline authoring standards applied when editing any `SKILL.md` |
+| **Commands** · `/open-in-modelbound`, `/sync-from-modelbound` | Bridge back to your ModelBound project |
+| **Hook** · `afterFileEdit` on `SKILL.md` | One-line token-budget hint on save |
+| **MCP server** · `modelbound` | Sync status, AI review, team rule libraries (requires API key) |
 
 ## Install
 
-- **VS Code Marketplace** — *coming soon*
-- **Open VSX (Cursor / Windsurf / VSCodium)** — *coming soon*
+### From the Cursor Marketplace
+*Pending review — link will appear here once published.*
 
-## Connect to ModelBound
+### Manual install
 
-1. Open the command palette → `ModelBound: Connect`.
-2. Your browser opens to `https://modelbound.co/extension/connect`.
-3. Sign in (GitHub, GitLab, Bitbucket or email) and approve the device.
-4. Done — the extension stores your API key locally in VS Code SecretStorage. You can sign out anytime with `ModelBound: Sign Out`.
+```bash
+# clone next to your project
+git clone https://github.com/modelbound/cursor-plugin ~/.cursor-plugins/modelbound
+
+# Cursor → Settings → Plugins → Install from path → choose ~/.cursor-plugins/modelbound
+```
+
+## Connect to ModelBound (optional)
+
+The four core checks (trust, token budget, duplicates, tool surface) run **fully locally** with no account.
+
+To unlock sync status, AI review, team rule libraries, and the scheduled re-scan, connect the plugin to your ModelBound account:
+
+1. In Cursor, run `> ModelBound: Connect`.
+2. Approve the device code in the browser tab that opens.
+3. The plugin stores the resulting `mb_live_*` key in Cursor's secret store and uses it as the `MODELBOUND_API_KEY` env var for the MCP server defined in `mcp.json`.
+
+You can revoke the key any time from [modelbound.co/settings/api-keys](https://modelbound.co/settings/api-keys).
 
 ## Telemetry
 
-The extension sends **lightweight, anonymous usage events** (event name + extension version + OS + editor — never file contents or PII) so we can measure feature usage. It respects `vscode.env.isTelemetryEnabled` and can be disabled at any time via the standard VS Code telemetry settings.
+Anonymous usage events are sent to ModelBound to measure install → activation and feature adoption. Events contain no file contents, no skill bodies, and no personal data — only event names, a random install ID, plugin version, and OS.
+
+To opt out, set the environment variable `MODELBOUND_TELEMETRY=off` in your shell profile.
 
 ## License
 
-MIT — © ModelBound
+MIT © ModelBound

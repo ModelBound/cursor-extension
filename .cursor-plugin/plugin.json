@@ -1,0 +1,19 @@
+{
+  "name": "modelbound-skill-health-lens",
+  "displayName": "ModelBound Skill Health Lens",
+  "version": "0.1.0",
+  "description": "Audit Agent Skills for trust, token budget, duplicates, and tool-surface risk. Connects to ModelBound for sync, AI review, and team libraries.",
+  "author": {
+    "name": "ModelBound",
+    "email": "hello@modelbound.co",
+    "url": "https://modelbound.co"
+  },
+  "license": "MIT",
+  "homepage": "https://modelbound.co",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/modelbound/cursor-plugin"
+  },
+  "keywords": ["modelbound", "agent-skills", "skill-md", "trust", "token-budget", "audit", "rag", "mcp"],
+  "logo": "assets/logo.svg"
+}

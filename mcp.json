@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "modelbound": {
+      "url": "https://mcp.modelbound.co",
+      "type": "http",
+      "headers": {
+        "Authorization": "Bearer ${MODELBOUND_API_KEY}"
+      }
+    }
+  }
+}
