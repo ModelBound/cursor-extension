@@ -62,9 +62,12 @@ Parse the `allowed_tools` frontmatter (and any explicit tool mentions in the bod
 
 When the user is signed in to ModelBound (via the `modelbound` MCP server defined in this plugin), also:
 
-- Call `modelbound.check_skill_sync_status` to mark each local skill as `synced` / `drift` / `local-only` / `remote-only`
-- Offer `modelbound.request_ai_review` for any skill scoring Red on Trust
-- Surface `modelbound.list_team_skill_rules` so team-level policies (banned tools, required sections) are checked too
+- Call `skills.list` (optionally filtered by `category` or `group_id`) and `skills.listGroups` to pull the user's Skills — including a whole group at once when they say things like "lens my Onboarding group" or "audit every Backend skill".
+- Use `skills.get` / `skills.getFile` for the full bundle, and `platform.exportSkillForIde` with `group_id` to bundle every skill in a group into the IDE in one shot.
+- Offer to request an AI review for any skill scoring Red on Trust.
+- Surface team-level policies (banned tools, required sections) so they're checked alongside the four core checks.
+
+> Note: ModelBound no longer uses the legacy "pack" concept — everything is a **Skill**, optionally organized into a **Skill group**. Older `packs.*` / `export_pack_for_ide` tool names still work as deprecated aliases but new code should use `skills.*` and `platform.exportSkillForIde`.
 
 If the MCP server is unreachable or the user is not signed in, the four core checks still run locally.
 
